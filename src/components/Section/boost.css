@@ -1,0 +1,42 @@
+.boost {
+  padding: 4rem 0;
+  color: #fff;
+  position: relative;
+  z-index: 0;
+  background-color: var(--darkViolet);
+  text-align: center;
+  overflow: hidden;
+}
+
+.boost h2 {
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.boost::after {
+  content: " ";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: url("../../assets/images/bg-boost-mobile.svg") left/cover
+    no-repeat;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+@media screen and (min-width: 48em) {
+  .boost::after {
+    content: " ";
+    background: url("../../assets/images/bg-boost-desktop.svg") right/cover
+      no-repeat;
+    top: 0;
+    right: 0;
+  }
+
+  .boost h2 {
+    font-size: 3rem;
+    margin-bottom: 3rem;
+  }
+}
