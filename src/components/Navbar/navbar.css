@@ -25,6 +25,7 @@ nav {
 .nav__menu_item {
   font-size: 3.5rem;
   color: var(--neutralGray);
+  margin-left: auto;
 }
 
 /* navbar media queries */
