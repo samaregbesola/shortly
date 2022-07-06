@@ -6,6 +6,7 @@ nav {
 
 .nav__content {
   display: flex;
+  -webkit-justify-content: space-between;
   justify-content: space-between;
   align-items: center;
   font-weight: 700;
