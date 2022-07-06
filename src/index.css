@@ -103,6 +103,8 @@ button {
   outline: none;
   cursor: pointer;
   display: block;
+  margin: 0;
+  padding: 0;
 }
 
 .btn {
