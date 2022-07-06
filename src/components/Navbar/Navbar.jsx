@@ -26,12 +26,12 @@ const Navbar = () => {
             >
               {!isOpen ? <FcMenu /> : <FaTimes />}
             </button>
-            <div className="nav__cta">
-              <a href="/">Login</a>
-              <a href="/" className="btn btn--rounded">
-                Sign Up
-              </a>
-            </div>
+          </div>
+          <div className="nav__cta">
+            <a href="/">Login</a>
+            <a href="/" className="btn btn--rounded">
+              Sign Up
+            </a>
           </div>
         </div>
         {isOpen ? <MobileNav /> : ""}
