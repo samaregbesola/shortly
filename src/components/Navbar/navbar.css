@@ -10,7 +10,7 @@ nav {
   align-items: center;
   font-weight: 700;
   width: 100%;
-  flex: 1;
+  flex-basis: 100%;
 }
 
 .nav__list,
@@ -18,9 +18,9 @@ nav {
   display: none;
 }
 
-.nav__menu {
+/* .nav__menu {
   margin-left: auto;
-}
+} */
 
 .nav__menu_item {
   font-size: 3.5rem;
