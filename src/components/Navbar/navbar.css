@@ -16,10 +16,13 @@ nav {
   display: none;
 }
 
+.nav__menu {
+  margin-left: auto;
+}
+
 .nav__menu_item {
   font-size: 3.5rem;
   color: var(--neutralGray);
-  flex: 1;
 }
 
 /* navbar media queries */
