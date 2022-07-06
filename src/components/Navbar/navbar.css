@@ -2,7 +2,6 @@
 
 nav {
   padding: 2rem 0;
-  width: 100%;
 }
 
 .nav__content {
@@ -10,6 +9,8 @@ nav {
   justify-content: space-between;
   align-items: center;
   font-weight: 700;
+  width: 100%;
+  flex: 1;
 }
 
 .nav__list,
