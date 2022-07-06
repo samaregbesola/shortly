@@ -26,6 +26,7 @@ nav {
   font-size: 3.5rem;
   color: var(--neutralGray);
   margin-left: auto;
+  align-self: flex-end;
 }
 
 /* navbar media queries */
