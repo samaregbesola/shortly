@@ -5,7 +5,7 @@ header {
 }
 
 .header {
-  padding: 10rem 0;
+  padding: 1rem 0 10rem;
   width: 100%;
   min-height: 60rem;
 }
@@ -17,6 +17,7 @@ header {
 .header__content {
   text-align: center;
   flex-basis: 100%;
+  margin-bottom: 6rem;
 }
 
 .header__content h1 {
@@ -58,7 +59,7 @@ header {
 
 @media screen and (min-width: 73em) {
   .header {
-    padding: 10rem 0;
+    padding: 2rem 0 10rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
