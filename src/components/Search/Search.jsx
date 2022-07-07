@@ -16,13 +16,13 @@ const Search = () => {
       setValidate("Please add a link");
       setTimeout(() => {
         setValidate("");
-      }, 3000);
+      }, 2500);
       return;
     } else if (keyword.length < 5 && !keyword.includes(".")) {
       setValidate("invalid link");
       setTimeout(() => {
         setValidate("");
-      }, 3000);
+      }, 2500);
       return;
     }
     setValidated(true);
