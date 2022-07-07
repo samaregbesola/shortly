@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export const useFetch = (url) => {
   const [data, setData] = useState(null);
@@ -16,7 +16,7 @@ export const useFetch = (url) => {
       const data = await res.json();
 
       setIsPending(false);
-      setData(data);
+      setData(data.result);
       setError(null);
     } catch (err) {
       setIsPending(false);

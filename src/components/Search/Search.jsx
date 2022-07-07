@@ -1,45 +1,69 @@
-import { useState } from "react";
-import { useFetch } from "../../hooks/useFetch";
+import { useState, useEffect } from "react";
+// import { useFetch } from "../../hooks/useFetch";
 import Results from "./Results";
 import "./search.css";
 const Search = () => {
-  const [keyword, setKeyword] = useState("");
-  const [term, setTerm] = useState("");
-  const [validated, setValidated] = useState(false);
-  const [validate, setValidate] = useState("");
-  const url = `https://api.shrtco.de/v2/shorten?url=${term}`;
+  const [link, setLink] = useState("");
+  const [isPending, setIsPending] = useState(false);
+  // const [error, setError] = useState(null);
+  const [linkResults, setLinkResults] = useState(
+    JSON.parse(localStorage.getItem("links") || "[]")
+  );
+  const [valid, setValid] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const { fetchData, isPending, error, data } = useFetch(url);
+  useEffect(() => {
+    window.localStorage.setItem("links", JSON.stringify(linkResults));
+  }, [linkResults]);
 
-  function validateForm() {
-    setValidated(false);
-    if (keyword === "") {
-      setValidate("Please add a link");
-      setTimeout(() => {
-        setValidate("");
-      }, 2500);
-      return;
-    } else if (keyword.length < 5 && !keyword.includes(".")) {
-      setValidate("invalid link");
-      setTimeout(() => {
-        setValidate("");
-      }, 2500);
-      return;
+  const messageTimeout = () => {
+    setTimeout(() => {
+      setValid(true);
+    }, 3000);
+  };
+
+  const handleChange = (e) => {
+    setLink(e.target.value);
+  };
+
+  const getShortLink = async () => {
+    let url = `https://api.shrtco.de/v2/shorten?url=${link}`;
+    setIsPending(true);
+    try {
+      const res = await fetch(url);
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+      const data = await res.json();
+
+      setIsPending(false);
+      setLinkResults([...linkResults, data]);
+    } catch (err) {
+      setIsPending(false);
+      console.log(err);
     }
-    setValidated(true);
-    return keyword;
-  }
+    setLink("");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    validateForm();
-    if (validated) {
-      setTerm(keyword);
-      fetchData();
+    const regex =
+      /[(http(s) ?): /(www)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/gi;
+    const isValid = regex.test(link);
+    if (isValid) {
+      getShortLink();
+    } else if (link === "") {
+      setValid(false);
+      setErrorMessage("Please add a link");
+      messageTimeout();
+      return;
+    } else {
+      setValid(false);
+      setErrorMessage("Please enter a valid link");
+      messageTimeout();
     }
+    e.target.reset();
   };
-
-  console.log(data, error);
 
   return (
     <section className="search">
@@ -49,26 +73,29 @@ const Search = () => {
             <div className="search__box">
               <input
                 type="text"
-                className={`search__input ${validate ? `error__input` : ""} `}
+                className={`search__input ${valid ? `` : `error__input`} `}
                 placeholder="Shorten a link here..."
-                onChange={(e) => {
-                  setKeyword(e.target.value);
-                }}
+                onChange={handleChange}
               />
-              {!validated && (
-                <span className={`search__error ${!validate && "hidden"}`}>
-                  {" "}
-                  {validate}{" "}
+              {!valid && (
+                <span className={`search__error ${!errorMessage && "hidden"}`}>
+                  {errorMessage}
                 </span>
               )}
               <button type="submit" className="btn btn--square">
-                {isPending ? `Working on it...` : `Shorten It!`}
+                {isPending ? `Generating Link...` : `Shorten It!`}
               </button>
             </div>
           </form>
         </div>
       </div>
-      <div className="search__results_container"></div>
+      <div className="search__results_container">
+        {linkResults
+          ? linkResults?.map((link) => {
+              return <Results key={link.result.code} result={link.result} />;
+            })
+          : ""}
+      </div>
     </section>
   );
 };
