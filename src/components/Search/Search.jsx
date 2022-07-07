@@ -47,13 +47,18 @@ const Search = () => {
           <div className="container search">
             <input
               type="text"
-              className={`search__input ${validate ? `error__input` : " "} `}
+              className={`search__input ${validate ? `error__input` : ""} `}
               placeholder="Shorten a link here..."
               onChange={(e) => {
                 setKeyword(e.target.value);
               }}
             />
-            {!validated && <span className="search__error"> {validate} </span>}
+            {!validated && (
+              <span className={`search__error ${!validate && "hidden"}`}>
+                {" "}
+                {validate}{" "}
+              </span>
+            )}
             <button type="submit" className="btn btn--square">
               {isPending ? `Working on it...` : `Shorten It!`}
             </button>

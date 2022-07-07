@@ -130,3 +130,7 @@ button {
 .w-full {
   width: 100%;
 }
+
+.hidden {
+  display: none;
+}
