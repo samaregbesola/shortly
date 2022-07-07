@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
+import Results from "./Results";
 import "./search.css";
 const Search = () => {
   const [keyword, setKeyword] = useState("");
@@ -41,31 +42,34 @@ const Search = () => {
   console.log(data, error);
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <div className="search__wrapper">
-          <div className="container search">
-            <input
-              type="text"
-              className={`search__input ${validate ? `error__input` : ""} `}
-              placeholder="Shorten a link here..."
-              onChange={(e) => {
-                setKeyword(e.target.value);
-              }}
-            />
-            {!validated && (
-              <span className={`search__error ${!validate && "hidden"}`}>
-                {" "}
-                {validate}{" "}
-              </span>
-            )}
-            <button type="submit" className="btn btn--square">
-              {isPending ? `Working on it...` : `Shorten It!`}
-            </button>
-          </div>
+    <section className="search">
+      <div className="search__wrapper">
+        <div className="container">
+          <form onSubmit={handleSubmit}>
+            <div className="search__box">
+              <input
+                type="text"
+                className={`search__input ${validate ? `error__input` : ""} `}
+                placeholder="Shorten a link here..."
+                onChange={(e) => {
+                  setKeyword(e.target.value);
+                }}
+              />
+              {!validated && (
+                <span className={`search__error ${!validate && "hidden"}`}>
+                  {" "}
+                  {validate}{" "}
+                </span>
+              )}
+              <button type="submit" className="btn btn--square">
+                {isPending ? `Working on it...` : `Shorten It!`}
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
-    </>
+      </div>
+      <div className="search__results_container"></div>
+    </section>
   );
 };
 

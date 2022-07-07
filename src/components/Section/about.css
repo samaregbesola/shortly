@@ -1,6 +1,6 @@
 .about {
   background: var(--gray);
-  padding: 12rem 0 6rem;
+  padding: 4rem 0 6rem;
   text-align: center;
   color: var(--grayishViolet);
 }
@@ -82,7 +82,7 @@
 
 @media screen and (min-width: 64em) {
   .about {
-    padding: 12rem 0;
+    padding: 4rem 0 12rem;
   }
 
   .about__card {
