@@ -126,6 +126,10 @@ button {
   border-radius: 0.5rem;
 }
 
+.btn--copy {
+  background: var(--darkViolet);
+}
+
 /* full width */
 .w-full {
   width: 100%;
