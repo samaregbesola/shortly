@@ -8,15 +8,21 @@ const Search = () => {
   const [validate, setValidate] = useState("");
   const url = `https://api.shrtco.de/v2/shorten?url=${term}`;
 
-  const { isPending, error, data } = useFetch(url);
+  const { fetchData, isPending, error, data } = useFetch(url);
 
   function validateForm() {
     setValidated(false);
     if (keyword === "") {
       setValidate("Please add a link");
+      setTimeout(() => {
+        setValidate("");
+      }, 3000);
       return;
     } else if (keyword.length < 5 && !keyword.includes(".")) {
       setValidate("invalid link");
+      setTimeout(() => {
+        setValidate("");
+      }, 3000);
       return;
     }
     setValidated(true);
@@ -28,15 +34,9 @@ const Search = () => {
     validateForm();
     if (validated) {
       setTerm(keyword);
+      fetchData();
     }
   };
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      console.log("This will run after 1 second!");
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
 
   console.log(data, error);
 
@@ -47,18 +47,16 @@ const Search = () => {
           <div className="container search">
             <input
               type="text"
-              className="search__input"
+              className={`search__input ${validate ? `error__input` : " "} `}
               placeholder="Shorten a link here..."
               onChange={(e) => {
                 setKeyword(e.target.value);
               }}
             />
+            {!validated && <span className="search__error"> {validate} </span>}
             <button type="submit" className="btn btn--square">
               {isPending ? `Working on it...` : `Shorten It!`}
             </button>
-            {!validated && (
-              <p style={{ color: "red", fontSize: "12px" }}> {validate} </p>
-            )}
           </div>
         </div>
       </form>

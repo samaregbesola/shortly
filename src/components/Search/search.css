@@ -10,6 +10,13 @@
   overflow: hidden;
 }
 
+.search__error {
+  color: var(--secondaryRed);
+  font-size: 1.2rem;
+  line-height: 0;
+  margin-top: -1rem;
+}
+
 .search::before {
   content: " ";
   position: absolute;
@@ -38,6 +45,10 @@
   outline: none;
 }
 
+.error__input {
+  border: 2px solid var(--secondaryRed);
+}
+
 .search__input:focus {
   outline: none;
 }
@@ -63,5 +74,12 @@
 
   .search__input {
     flex: 70%;
+    position: relative;
+  }
+
+  .search__error {
+    position: absolute;
+    bottom: 3.2rem;
+    left: 6rem;
   }
 }
