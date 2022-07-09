@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
-// import { useFetch } from "../../hooks/useFetch";
 import Results from "./Results";
 import "./search.css";
 const Search = () => {
   const [link, setLink] = useState("");
   const [isPending, setIsPending] = useState(false);
-  // const [error, setError] = useState(null);
   const [linkResults, setLinkResults] = useState(
     JSON.parse(localStorage.getItem("links") || "[]")
   );
@@ -65,6 +63,10 @@ const Search = () => {
     e.target.reset();
   };
 
+  let uniqueList = Array.from(new Set(linkResults.map(JSON.stringify))).map(
+    JSON.parse
+  );
+
   return (
     <section className="search">
       <div className="search__wrapper">
@@ -90,8 +92,8 @@ const Search = () => {
         </div>
       </div>
       <div className="search__results_container">
-        {linkResults
-          ? linkResults?.map((link) => {
+        {uniqueList
+          ? uniqueList?.map((link) => {
               return <Results key={link.result.code} result={link.result} />;
             })
           : ""}

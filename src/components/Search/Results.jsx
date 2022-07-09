@@ -11,7 +11,7 @@ const Results = ({ result }) => {
         setCopy(true);
         setTimeout(() => {
           setCopy(false);
-        }, 5000);
+        }, 2500);
       },
       function () {
         alert("copy failed");
