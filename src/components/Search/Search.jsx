@@ -35,7 +35,7 @@ const Search = () => {
       const data = await res.json();
 
       setIsPending(false);
-      setLinkResults([...linkResults, data]);
+      setLinkResults([data, ...linkResults]);
     } catch (err) {
       setIsPending(false);
       console.log(err);
