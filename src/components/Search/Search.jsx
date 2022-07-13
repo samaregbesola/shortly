@@ -63,9 +63,9 @@ const Search = () => {
     e.target.reset();
   };
 
-  let uniqueList = Array.from(new Set(linkResults.map(JSON.stringify))).map(
-    JSON.parse
-  );
+  let uniqueList = Array.from(new Set(linkResults.map(JSON.stringify)))
+    .slice(0, 5)
+    .map(JSON.parse);
 
   return (
     <section className="search">
